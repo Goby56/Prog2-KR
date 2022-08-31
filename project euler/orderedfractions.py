@@ -1,7 +1,6 @@
 # https://projecteuler.net/problem=71
 
-N = 1e6
-
+N = int(1e3)
 
 def find_primes_under(n) -> list:
     primes = []
@@ -19,7 +18,7 @@ def is_prime(n: int) -> bool:
     return True
 
 
-PRIMES = find_primes_under(200)
+PRIMES = find_primes_under(N)
 
 
 def primes_under(n: int) -> list:
@@ -28,6 +27,7 @@ def primes_under(n: int) -> list:
         if p > n:
             return primes[::-1]
         primes.append(p)
+    return primes[::-1]
 
 
 def factors_of(n: int) -> list:
@@ -35,20 +35,25 @@ def factors_of(n: int) -> list:
 
     for p in primes_under(n):
         if n % p == 0:
-            factors.append(p)
-            factors.extend(factors_of(n // p))
-            # factors are bring appended twice
+            if n // p != 1:
+                factors.append(p)
+                factors.extend(factors_of(n // p))
             break
     return factors
 
 
-print(factors_of(50))
+print(factors_of(N))
 
 
 def hcf(n, d):
-    pass
+    common_denominators = []
+    for i in factors_of(n):
+        for j in factors_of(d):
+            if i == j:
+                common_denominators.append(i)
+    print(common_denominators)
 
-
+    
 def proper_fractions_under(n: int) -> list:
     proper_fractions = []
 
@@ -57,3 +62,6 @@ def proper_fractions_under(n: int) -> list:
             if hcf(n, d):
                 proper_fractions.append((n, d))
     return proper_fractions
+
+
+hcf(40, 80)
