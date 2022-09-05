@@ -1,37 +1,39 @@
 # https://projecteuler.net/problem=71
 
-N = int(1e3)
+# def find_primes_under(n) -> list:
+#     primes = []
 
-def find_primes_under(n) -> list:
-    primes = []
-
-    for i in range(2, n):
-        if is_prime(i):
-            primes.append(i)
-    return primes
+#     for i in range(2, n):
+#         if is_prime(i):
+#             primes.append(i)
+#     return primes
 
 
-def is_prime(n: int) -> bool:
-    for d in range(2, n):
-        if n % d == 0:
-            return False
-    return True
+# def is_prime(n: int) -> bool:
+#     for d in range(2, n):
+#         if n % d == 0:
+#             return False
+#     return True
 
+# PRIMES = find_primes_under(N)
 
-PRIMES = find_primes_under(N)
+from json import load
 
+N = int(1e6)
+
+with open("primes.json", "r") as f:
+    PRIMES = load(f)
 
 def primes_under(n: int) -> list:
     primes = []
     for p in PRIMES:
         if p > n:
-            return primes[::-1]
+            break
         primes.append(p)
     return primes[::-1]
 
-
 def factors_of(n: int) -> list:
-    factors = [n] if is_prime(n) else []
+    factors = [n] if n in PRIMES else []
 
     for p in primes_under(n):
         if n % p == 0:
@@ -41,27 +43,37 @@ def factors_of(n: int) -> list:
             break
     return factors
 
-
-print(factors_of(N))
-
-
 def hcf(n, d):
     common_denominators = []
-    for i in factors_of(n):
-        for j in factors_of(d):
-            if i == j:
-                common_denominators.append(i)
-    print(common_denominators)
+    d_factors = factors_of(d)
 
-    
-def proper_fractions_under(n: int) -> list:
-    proper_fractions = []
+    for fn in factors_of(n):
+        for i, fd in enumerate(d_factors):
+            if fn == fd:
+                common_denominators.append(d_factors.pop(i))
+                break
 
-    for d in range(n):
-        for n in range(d):
-            if hcf(n, d):
-                proper_fractions.append((n, d))
-    return proper_fractions
+    for factor in common_denominators:
+        n //= factor
+        d //= factor
+    return (n, d)
+
+def proper_fractions_under(n: int) -> list[tuple]:
+    proper_fractions = set()
+
+    for i in range(1, n+1):
+        for j in range(1, i):
+            fraction = hcf(j, i)
+            proper_fractions.add(fraction)
+            # if fraction not in proper_fractions:
+            #     proper_fractions.append(fraction)
+
+    return sorted(proper_fractions, key=lambda frac: frac[0]/frac[1])
+
+fractions = proper_fractions_under(1000)
+for i, frac in enumerate(fractions):
+    if frac == (3, 7):
+        print(fractions[i-1])
+        break
 
 
-hcf(40, 80)
