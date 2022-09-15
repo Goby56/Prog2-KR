@@ -8,42 +8,58 @@ grid = np.array([
     [1024, 1024, 64, 0]
 ])
 print(grid)
-# move = np.random.randint(0, 4)
-move = 0
-
+key = np.random.randint(0, 4)
+print(key)
 # 0, 1, 2, 3 = left, up, right, down
-direction = 1 if move in [2, 3] else -1
+direction = 1 if key in [2, 3] else -1
+print(direction)
+if key in [1, 3]: # if the direction is vertical
+    grid = np.transpose(grid) # flip rows and columns
 
+def move(grid, r):
+    for c in range(4)[::direction]:
+        if grid[r][c] == 0: continue
+        if grid[r][c + direction] == 0:
+            grid[r][c + direction] = grid[r][c]
+            grid[r][c] = 0
 
-# if move in [0, 2]:
-#     for r in range(4):
-#         while True:
-#             for c in range(4)[::direction]:
-#                 if grid[r][c + direction] == 0:
-#                     grid[r][c + direction] = grid[r][c]
-#                     grid[r][c] = 0
-#                     continue
-#                 if grid[r][c] != grid[r][c + direction]:
-#                     break
-#                 grid[r][c + direction] *= 2
-#                 grid[r][c] = 0
+def combine(grid, r):
+    for c in range(4)[::direction]:
+        if grid[r][c] == 0: continue
+        if grid[r][c + direction] != grid[r][c]: continue
+        grid[r][c + direction] *= 2
+        grid[r][c] = 0
 
+for r in range(4):
+    move(grid, r)
+    combine(grid, r)
+    move(grid, r)
+    
+    
+# for c in range(4)[::-direction]:  
+#     for i in range(c)[::direction]:
+#         if grid[r][i] == 0: 
+#             grid[r][i] = grid[r][i - direction]
+#             grid[r][i - direction] = 0
+#         if grid[r][i - direction] != grid[r][i]: break
+#         grid[r][i] *= 2
+#         grid[r][i - direction] = 0
+#         break
 
-if move in [0, 2]:
-    for r in range(4):
-        for c in range(4)[::-direction]:  
-            for i in range(c)[::direction]:
-                if grid[r][i] == 0: 
-                    j = i
-                    while grid[r][j] != 0:
-                        pass
-                    # keep checking if it is zero
-                    grid[r][i] = grid[r][c]
-                    grid[r][c] = 0
-                    continue
-                if grid[r][c] != grid[r][i]: break
-                grid[r][i] *= 2
-                grid[r][c] = 0
+# --------- Half good ---------
+# for r in range(4):
+#     for c in range(4)[::-direction]:  
+#         for i in range(c)[::direction]:
+#             if grid[r][i] == 0: 
+#                 grid[r][i] = grid[r][i - direction]
+#                 grid[r][i - direction] = 0
+#             if grid[r][i - direction] != grid[r][i]: break
+#             grid[r][i] *= 2
+#             grid[r][i - direction] = 0
+#             break
+
+if key in [1, 3]:
+    grid = np.transpose(grid)
 
 print(grid)
 
