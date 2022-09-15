@@ -16,24 +16,34 @@ print(direction)
 if key in [1, 3]: # if the direction is vertical
     grid = np.transpose(grid) # flip rows and columns
 
-def move(grid, r):
-    for c in range(4)[::direction]:
-        if grid[r][c] == 0: continue
-        if grid[r][c + direction] == 0:
-            grid[r][c + direction] = grid[r][c]
-            grid[r][c] = 0
+# def move(grid, r):
+#     for c in range(4)[::direction]:
+#         if grid[r][c] == 0: continue
+#         if grid[r][c + direction] == 0:
+#             grid[r][c + direction] = grid[r][c]
+#             grid[r][c] = 0
 
-def combine(grid, r):
-    for c in range(4)[::direction]:
-        if grid[r][c] == 0: continue
-        if grid[r][c + direction] != grid[r][c]: continue
-        grid[r][c + direction] *= 2
-        grid[r][c] = 0
+# def combine(grid, r):
+#     for c in range(4)[::direction]:
+#         if grid[r][c] == 0: continue
+#         if grid[r][c + direction] != grid[r][c]: continue
+#         grid[r][c + direction] *= 2
+#         grid[r][c] = 0
+
+# for r in range(4):
+#     move(grid, r)
+#     combine(grid, r)
+#     move(grid, r)
+def move(r):
+    for c in range(4)[::-direction]:
+        for i in range(c)[::-1]:
+            print(i)
+            if grid[r][i] == 0:
+                grid[r][i] = grid[r][i - direction]
+                grid[r][i - direction] = 0
 
 for r in range(4):
-    move(grid, r)
-    combine(grid, r)
-    move(grid, r)
+    move(r)
     
     
 # for c in range(4)[::-direction]:  
