@@ -1,13 +1,10 @@
-grid = [[int(y) for y in input().split()] for x in range(4)]
+import numpy as np
+
+grid = np.array([[int(y) for y in input().split()] for x in range(4)])
 direction = int(input())
 # 0, 1, 2, 3 = left, up, right, down
 
-def rotate_matrix(m):
-    # copy pasta
-    return [[m[j][i] for j in range(len(m))] for i in range(len(m[0])-1,-1,-1)]
-
-for i in range(direction):
-    grid = rotate_matrix(grid)
+grid = np.rot90(grid, direction)
 
 def combine(r):
     for c in range(3):
@@ -28,8 +25,7 @@ for r in range(4):
     combine(r)
     move(r)
 
-for i in range(4 - direction):
-    grid = rotate_matrix(grid)
+grid = np.rot90(grid, -direction)
 
 for row in grid:
     print(*row)
