@@ -24,3 +24,4 @@ for s in solutions:
                     equations.append(f"4{op1}4{op2}4{op3}4 = {s}")
 
     print("no solution") if len(equations) == 0 else print(equations[0])
+
