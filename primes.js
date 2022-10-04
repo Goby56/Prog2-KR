@@ -14,4 +14,4 @@ function sieve(n) {
 }
 
 
-fs.writeFile("primes.json", JSON.stringify(sieve(1e6)), x=>x)
+fs.writeFile("primes.json", JSON.stringify(sieve(1e7)), x=>x)
