@@ -1,25 +1,32 @@
-# n, q = [int(x) for x in input().split()]
+import sys
+n, q = [int(x) for x in input().split()]
 # tests = [int(input()) for x in range(q)]
 
 def primes_under(n: int):
     numbers = range(2, n+1)
+    primes = [1 for x in range(2, n+1)]
 
-    n_primes = n
-
+    print(sys.getsizeof(primes))
     for i, m in enumerate(numbers):
-        for k in range(i+m, n, m):
-            n_primes -= 1
+        for k in range(i+m, n-1, m): # numbers[i] is prime but every multiple numbers[i+m] is not
+            primes[k] = 0
+    
+    return sum(primes)
 
-    return n_primes
+def is_prime(n: int):
+    if n == 1: return 0
+    for m in range(2, n):
+        if n%m == 0: return 0
+    return 1
+
+print(primes_under(n))
+
+for i in range(q):
+    print(is_prime(int(input())))
 
 
-# print(len(primes))
 
-# for i in range(q):
-#     number = int(input())
-#     print(1) if number in primes else print(0)
-
-
+# -------- Memory hog --------
 def sieve(n: int):
     numbers = [x for x in range(2, n+1)]
     primes = [1 for x in range(n)]
@@ -29,8 +36,3 @@ def sieve(n: int):
             primes[k] = 0
 
     return [x for i, x in enumerate(numbers) if primes[i] == 1]
-
-print(len(sieve(101)))
-print(primes_under(101))
-
-
