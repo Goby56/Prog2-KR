@@ -1,1 +1,1 @@
-print(sum([True, True]))
+print({"per":3}["pär"])
