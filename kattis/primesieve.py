@@ -1,10 +1,6 @@
-import sys
-from memory_profiler import profile
-
 n, q = [int(x) for x in input().split()]
 # tests = [int(input()) for x in range(q)]
 
-@profile
 def primes_under(n: int):
     numbers = range(2, n+1)
     primes = [True for x in range(2, n+1)]
@@ -15,7 +11,6 @@ def primes_under(n: int):
             primes[k] = False
     return sum(primes)
 
-@profile
 def is_prime(n: int):
     if n == 1:
         return 0
@@ -23,7 +18,6 @@ def is_prime(n: int):
         if n % m == 0:
             return 0
     return 1
-
 
 print(primes_under(n))
 
@@ -40,7 +34,6 @@ for i in range(q):
 9972
 9973
 """
-
 
 # -------- Memory hog --------
 def sieve(n: int):
