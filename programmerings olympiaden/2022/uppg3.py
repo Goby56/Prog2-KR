@@ -1,17 +1,17 @@
 N = int(input("Antal med grönt kort, N  ? "))
 M = int(input("Antal utan grönt kort, M ? "))
 
-have_climbed = 0
 minutes = 0
 
-minutes += 20 if N % 2 == 0 else 30
-
-if M > 0 and M < N:
-    minutes += 10 if N % 2 == 0 else 0
+if M == 0:
+    minutes += 20 if N % 2 == 0 else 30
+elif M < N:
+    minutes += 20 if N % 2 == 0 else 30
 elif M == N:
-    minutes += 10
+    minutes += 30
 elif M > N:
-    minutes += 10*(M//N) if N % 2 == 0 else 10*(M//N) + 10
+    minutes += 10*(M//N) + 10*(M % N)
+    minutes += 20
 
 print("Svar:", minutes)
 
@@ -85,6 +85,46 @@ DEF
 Ad, BC
 AB, Ce
 BA, Cf
+
+AB, Cd
+
+AB
+cdef
+
+Ac, Bd
+Ae, Bf
+AB
+BA
+
+ABCD
+efgh
+
+Ae, Bf, Cg, Dh
+AB, CD
+BA, DC
+
+ABC
+ef
+
+Ae, Bf
+A
+
+ABCDE
+fghij
+
+AB, CD, Ef
+BA, DC, Eg
+Ah, Bi, Cj, De
+
+ABCDE
+fghi
+
+AB, Cf, Dg, Eh
+Ai, BC, DE
+BA, ED,
+
+
+
 
 
 """

@@ -1,29 +1,44 @@
+import time
+import pyperclip
 # https://projecteuler.net/problem=71
 
 # *Using Stern-Brocot sequence (1,1,2,1,3,2,3,1,4,3,5,2,5,3,4,1,5)
-d = 100
-# TOOO SLOW
-seq = [1, 1]
-i = 0
-while seq[len(seq)-2:] != [d-1, d]:
-    seq.append(seq[i]+seq[i+1])
-    if seq[len(seq)-2:] == [d-1, d]: break
-    seq.append(seq[i+1])
-    i += 1
-    print(i)
-
-fracs = []
-for i in range(len(seq)-1):
-    if seq[i]/seq[i+1] < 1 and seq[i+1] <= d:
-        fracs.append((seq[i], seq[i+1]))
-
-fracs = sorted(fracs, key=lambda f: f[0]/f[1])
 
 
-for i, f in enumerate(fracs):
-    if f == (3, 7):
-        print(fracs[i-1][0])
-        break
+def stern_brocot(d: int):
+    # TOOO SLOW
+    seq = [1, 1]
+    i = 0
+    while seq[len(seq)-2:] != [d-1, d]:
+        seq.append(seq[i]+seq[i+1])
+        if seq[len(seq)-2:] == [d-1, d]:
+            break
+        seq.append(seq[i+1])
+        i += 1
+
+    fracs = []
+    for i in range(len(seq)-1):
+        if seq[i]/seq[i+1] < 1 and seq[i+1] <= d:
+            fracs.append((seq[i], seq[i+1]))
+
+    fracs = sorted(fracs, key=lambda f: f[0]/f[1])
+    return fracs
+
+
+n = 1
+t0 = time.time()
+for i in range(n):
+    stern_brocot(25)
+t1 = time.time()
+
+delta = (t1-t0)/n
+pyperclip.copy(delta)
+print(delta)
+
+# for i, f in enumerate(fracs):
+#     if f == (3, 7):
+#         print(fracs[i-1][0])
+#         break
 
 
 # sequence = stern_brocot(5)
@@ -31,7 +46,6 @@ for i, f in enumerate(fracs):
 
 # print(fractions)
 
-        
 
 # def find_primes_under(n) -> list:
 #     primes = []
@@ -108,5 +122,3 @@ for i, f in enumerate(fracs):
 #     if frac == (3, 7):
 #         print(fractions[i-1])
 #         break
-
-
