@@ -1,0 +1,6 @@
+Antal påsar ? 4
+Antal personer ? 100
+Påse 1 räcker till ? 54
+Påse 2 räcker till ? 2
+Påse 3 räcker till ? 33
+Påse 4 räcker till ? 16

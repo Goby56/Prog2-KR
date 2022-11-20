@@ -1,0 +1,7 @@
+Antal burar ? 15
+Antal djurarter ? 10
+Antal bråkiga grupper ? 4
+HEJA
+DIG
+BAD
+BIGFACE
