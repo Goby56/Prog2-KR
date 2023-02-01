@@ -5,3 +5,6 @@
 
 ### Tkinter project repo
 [Tk Minesweeper](https://github.com/Goby56/tk-minesweeper)
+
+### Socket project repo
+[Socket Whiteboard](https://github.com/Goby56/socket-whiteboard)
