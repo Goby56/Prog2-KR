@@ -1,12 +1,15 @@
 # Prog2-KR
 
-### Javascript project repo
+### Databas projekt repo
+[Snips](https://github.com/Goby56/snips/tree/main)
+
+### Javascript projekt repo
 [Socket Codenames](https://github.com/Goby56/socket-codenames)
 
-### Tkinter project repo
+### Tkinter projekt repo
 [Tk Minesweeper](https://github.com/Goby56/tk-minesweeper)
 
-### Socket project repo
+### Socket projekt repo
 [Socket Whiteboard](https://github.com/Goby56/socket-whiteboard)
 
 ### Holger's repo
